@@ -1,0 +1,9 @@
+Figs/*.pdf
+.RData
+.RHistory
+*.Rout
+*.aux
+*.log
+*.out
+*.o
+*.os

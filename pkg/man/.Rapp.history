@@ -1,0 +1,5 @@
+c <- list(a=1, b=2, c=3)
+c
+c <- c(c, c=4);c
+?list
+?alist
