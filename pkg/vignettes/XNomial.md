@@ -113,7 +113,7 @@ Other measures are possible, and can be preferable in some circumstances. In par
 ### <a name="use"></a>When to use `xmulti()` versus `xmonte()`
 
 
-Simply put, `xmulti` is always preferable except when it takes too long. If it does, then you can get the same information from `xmonte` but with a bit less precision. Calling `xmulti()` generates all of the possible ways $n$ objects can be placed into $k$ categories, and computes the three measures of goodness-of-fit described above for each. The number of these combinations is $latex {n+k-1 \choose k-1}$. On my 2013 iMac, `xmulti` can handle about 10^8 combinations per second. If $n$ and $k$ are so large that `xmulti` takes too long, then it's better to use `xmonte` which looks at only a random sampling of the combinations. Typically, a sample of 10^5 or 10^6 is adequate. This procedure is called a "Monte Carlo" test. There is no reason to prefer `xmonte` over `xmulti` unless the latter takes too long.
+Simply put, `xmulti` is always preferable except when it takes too long. If it does, then you can get the same information from `xmonte` but with a bit less precision. Calling `xmulti()` generates all of the possible ways $n$ objects can be placed into $k$ categories, and computes the three measures of goodness-of-fit described above for each. The number of these combinations is $latex {n+k-1 \choose k-1}$. On my 2012 iMac, `xmulti` can handle about 10^8 combinations per second. If $n$ and $k$ are so large that `xmulti` takes too long, then it's better to use `xmonte` which looks at only a random sampling of the combinations. Typically, a sample of 10^5 or 10^6 is adequate. This procedure is called a "Monte Carlo" test. There is no reason to prefer `xmonte` over `xmulti` unless the latter takes too long.
 
 
 ### <a name="e1"></a>**Example 1:** Gregor Mendel's data
@@ -280,6 +280,6 @@ xmulti(obsMut, probMut, detail = 3, histobins = T)
 ![plot of chunk plotMut](figure/plotMut.png) 
 
 
-The exact $P$ value of 0.48 is considerably smaller than the asymptotic value one would obtain, 0.71. By looking at the histogram we can see that this discrepancy is not unexpected given how different the actual distribution is compared with the blue curve.
+The exact $P$ value of 0.048 is considerably smaller than the asymptotic value one would obtain, 0.071. By looking at the histogram we can see that this discrepancy is not unexpected given how different the actual distribution is compared with the blue curve.
 
 
