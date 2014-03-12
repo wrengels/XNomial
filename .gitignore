@@ -1,9 +1,10 @@
 Figs/*.pdf
-.RData
-.RHistory
-*.Rout
+**/.RData
+**/.RHistory
+**/*.Rout
 *.aux
 *.log
 *.out
-*.o
-*.os
+**/*.o
+**/*.so
+**/*DS_Store

@@ -1,4 +1,4 @@
 XNomial
 =======
 
-Perform exact test for multinomial distribution.
+Perform exact test for multinomial distribution. See package \dQuote{XNomial} on CRAN.
