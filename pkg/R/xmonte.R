@@ -13,11 +13,10 @@
 #' 
 #' @inheritParams xmulti
 #' @param ntrials the number of random trials to look at, such as \code{ntrials=100000}
-
 #' 
 #' @return \code{xmonte} returns a list with the following components:
 #' \item{$ obs}{the observed numbers used as imput}
-#' \item{$ expr}{expected ratios}
+#' \item{$ expr}{expected ratios, arbitrary scale}
 #' \item{$ ntrials}{the number of random tables examined}
 #' \item{$ statType}{which test statistic was used}
 #' \item{$ pLLR/pProb/pChi}{the P value computed for the given test statistic}
@@ -31,7 +30,7 @@
 #' \item{$ asymptotoc.p.value}{the P value obtained from the classical asymptotic test -- use for comparison only}
 #' 
 #' @examples
-#' #One of Gregor Mendel's crosses produced four types of pea seeds in the numbers:
+#' #One of Gregor Mendel's crosses produced four types of pea seeds in the numbers as follows:
 #' peas <- c(315, 108, 101, 32)
 #' #and he expected them to appear in the ratio of 9:3:3:1 according to his genetic model.
 #' expected <- c(9, 3, 3, 1)

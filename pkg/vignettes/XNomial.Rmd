@@ -1,44 +1,42 @@
 <!--
-%\VignetteEngine{knitr}
+%\VignetteEngine{knitr::rmarkdown}
 %\VignetteIndexEntry{XNomial}
 -->
 ```{r setup, include=FALSE}
 library(knitr)
 library(XNomial)
+version <- packageDescription("XNomial", fields = "Version")
 opts_chunk$set(fig.width=8, fig.height=5)
 set.seed(60823316) 
 ```
 
-
 <STYLE type="text/css">
   h1,h2,h3,h4,h5 { 
     font-family: palatino, georgia, serif;
-    color: royalblue;
+    color: Maroon;
   }
     h1, h6{
     text-align: center;
   }
+  h1{line-height: 50px}
   body{
-    font-size: 0.9em;
-    line-height: 23px;
+    font-size: 1.3em;
+    line-height: 21px;
   }
   h3{
   font-weight: normal;
+  font-size: 1.6em;
+  line-height: 24px;
   }
   h6{
-        font-size: 0.9em;
+        font-size: 1.0em;
         font-weight: normal;
-        line-height: 5px;      
+        line-height: 0.8em;      
    }
    hr{
      border-top-style: solid;
      border-top-width: medium;
    }
-  code {
-    font-size: 80%;
-    line-height: 140%;
-    border: 1px solid #ccc;
-  }
    @media print{
   hr { 
       visibility: inherit;
@@ -54,6 +52,7 @@ XNomial -- Exact Test For Multinomial
 
 ###### William R. Engels  <wrengels@wisc.edu>  
 ###### University of Wisconsin, Madison -- Genetics Department
+###### version `r version`
 * * *
 ### Contents
 * Purpose -- [1](#purp)
@@ -126,6 +125,7 @@ The Austrian monk performed some crosses with garden pea plants. In one experime
 
 ```{r peasF2}
 peasF2 <- c(315, 108, 101, 32)
+getwd()
 ```
 According to his genetics model, these types should have appeared in the ratio of 9:3:3:1, so
 ```{r peasExp}
@@ -189,8 +189,8 @@ xmonte(rePeas, reExp, detail=3, histobins=T)
 ```
 The red area of the histogram represents the $P$ value. In this case, $P$ is much smaller than in Mendel's real data, indicating that the fit is not nearly so good, and we will want to modify our hypothesis. Perhaps the two shades of *yellow* were too close for the human eye to distinguish accurately and misclassifications occurred.
 
-<a name="e3"></a>
-### **Example 3:** Multinomial with Poisson probabilities
+
+### <a name="e3"></a>**Example 3:** Multinomial with Poisson probabilities
 
 Here is another example, also from genetics. Suppose you treat 100 chromosomes with a mutagen dose calibrated to deliver an average of 0.2 mutations per chromosome.  You find that 84 of them received no mutations, 11 had exactly one mutation, 4 had exactly 2 mutations, and one chromosome had more than 2 but you could not count how many. So the observed counts are:
 ```{r obsMut}

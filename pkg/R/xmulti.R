@@ -2,21 +2,28 @@
 # Goodness-Of-Fit Test For Multinomial Distribution With Fixed Probabilities
 # Full Enumeration version
 # Bill Engels
+#Updated to trap underflow errors 16 December 2015
 #
 # Compute the probability that the test statistic is "at least as extreme" as observed. The test statistic can
 # be selected from among three choices: \dQuote{LLR} for Log Likelihood Ratio, \dQuote{Prob} for the probability itself or \dQuote{Chisq}
 # for the standard chi square statistic. 
 
+# note: n * log(pmax) must not be less than .Machine$double.xmin or there will be underflow.
 
 #' Perform Multinomial Goodness-Of-Fit Test By Full Enumeration
 #' 
 #' Use \code{xmulti} to compute a P value to test whether a set of counts fits a specific multinomial distribution. It does this by examining all possible outcomes with the same total count and determining the total (multinomial) probability of those cases which deviate from the expectation by at least as much as the observed. Please see the vignette for more.
 #' 
+# These calls to eliminate the "no visible global function definition for ..." from CRAN submission
+#' @importFrom graphics barplot lines
+#' @importFrom stats dchisq dmultinom pchisq qchisq rmultinom
+#' 
+
 #' @param obs vector containing the observed numbers. All are non-negative integers summing to \code{> 0}.
 #' @param expr vector containing expectation. The length should be the same as that of \code{obs} and they should be non-negative summing to \code{> 0}. They need not be integers or sum to one.
 #' @param statName name of the test statistic to use as a measure of how deviant an observation is from the expectation. The choices are: \dQuote{LLR} for the log-likelihood ratio, \dQuote{Prob} for the probability, \dQuote{Chisq} for the chisquare statistic.
 #' @param histobins specifies histogram plot. If set to 0, \code{F} or \code{FALSE} no histogram is plotted. If set to 1 or \code{T} or \code{TRUE} a histogram with 500 bins will be plotted. If set to a number \code{> 1} a histogram with that number of bins is plotted.
-#' @param histobounds vector of length 2 indicating the bounds for the histogram, if any. If unspecified, bounds will be determined to include about 99.9% of the distribution.
+#' @param histobounds vector of length 2 indicating the bounds for the histogram, if any. If unspecified, bounds will be determined to include about 99.9 percent of the distribution.
 #' @param showCurve should an asymptotic curve be drawn over the histogram?
 #' @param detail how much detail should be reported concerning the P value. If 0, nothing is printed for cases where the function is used programmatically. Minimal information is printed if \code{detail} is set to 1, and additional information if it is set to 2.
 #' @param safety a large number, such as one billion, to set a limit on how many samples will be examined. This limit is there to avoid long computations.
@@ -73,6 +80,12 @@ xmulti <-
 function(obs, expr, statName = "LLR", histobins = F, histobounds = c(0,0), showCurve = T, detail=1, safety=1e9) {
 		if(length(obs) != length(expr)) stop("\nThere must be the same number of observed and expected values\n");
 		if(length(obs) < 2) stop("\nThere must be at least two categories\n");
+		ntotal <- sum(obs)
+		extotal <- sum(expr)
+		if(ntotal <= 0) stop("\nThe total observations must be positive")
+		if(extotal <= 0) stop("\nThe sum of the expected numbers must be positive")
+		maxprob  <- max(expr/extotal)
+		if (ntotal * log(maxprob) <= log(.Machine$double.xmin)) stop("\nThe numbers of observations are too large causing underflow error. The monte carlo version, \"xmonte\" is recommended for this case.")
   		statType = which(c("LLR", "Prob", "Chisq") == statName);
   		if(histobins == 1){ histobins  <- 500};   #The default is 500 bins
   		if(histobounds[[2]] == 0) {histobounds[[2]] <- qchisq(.999, length(obs) - 1)};

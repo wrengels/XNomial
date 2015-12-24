@@ -123,6 +123,11 @@ The Austrian monk performed some crosses with garden pea plants. In one experime
 
 ```r
 peasF2 <- c(315, 108, 101, 32)
+getwd()
+```
+
+```
+## [1] "/Users/WRE/DropBox/XNomial/pkg/vignettes"
 ```
 
 According to his genetics model, these types should have appeared in the ratio of 9:3:3:1, so
